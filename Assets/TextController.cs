@@ -1,5 +1,7 @@
 ﻿// Copyright 2017 Michael J. Ohl
-// hosted @ https://gamebucket.io/game/6f00b1b9-e4ae-492e-9aef-768fc115ff02
+/* TextController manages state in a state-machine controlled
+ * simple text adventure game. Story text is written in file.
+ */
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,13 +9,17 @@ using System.Collections;
 
 public class TextController : MonoBehaviour {
 
+    // Unity UI Text element
 	public Text text;
 	
+    // Possible states in text display state-machine
 	private enum States {
 		cell_0, cell_1, cell_helmet, helmet, pirate_0, pirate_1, lock_0, lock_1, 
 		corridor_0, corridor_1, corridor_2, corridor_3, corridor_4, launch_bay,
 		floor, stairs_0, stairs_1, stairs_2, guard_post_0, guard_post_1
 		};
+
+    // Player state
 	private States myState;
 
 	// Use this for initialization
@@ -23,29 +29,33 @@ public class TextController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		print (myState);
-		if 		(myState == States.cell_0) 		{cell_0();}
-		else if (myState == States.cell_1)		{cell_1();} 
-		else if (myState == States.pirate_0) 	{pirate_0();}
-		else if (myState == States.pirate_1)	{pirate_1();} 
-		else if (myState == States.lock_0) 		{lock_0();}
-		else if (myState == States.lock_1) 		{lock_1();} 
-		else if (myState == States.helmet) 		{helmet();}
-		else if (myState == States.cell_helmet)	{cell_helmet();}
-		else if (myState == States.corridor_0)	{corridor_0();}
-		else if (myState == States.stairs_0)	{stairs_0();}
-		else if (myState == States.floor)		{floor();}
-		else if (myState == States.guard_post_0){guard_post_0();}
-		else if (myState == States.corridor_1)	{corridor_1();}
-		else if (myState == States.stairs_1)	{stairs_1();}
-		else if (myState == States.guard_post_1){guard_post_1();}
-		else if (myState == States.corridor_2)	{corridor_2();}
-		else if (myState == States.stairs_2)	{stairs_2();}
-		else if (myState == States.corridor_3)	{corridor_3();}
-		else if (myState == States.corridor_4)	{corridor_4();}
-		else if (myState == States.launch_bay)	{launch_bay();}
+		// Debug.Log(myState);
+        switch (myState)
+        {
+            case States.cell_0:         { cell_0();         break; }
+            case States.cell_1:         { cell_1();         break; }
+            case States.pirate_0:       { pirate_0();       break; }
+            case States.pirate_1:       { pirate_1();       break; }
+            case States.lock_0:         { lock_0();         break; }
+            case States.lock_1:         { lock_1();         break; }
+            case States.helmet:         { helmet();         break; }
+            case States.cell_helmet:    { cell_helmet();    break; }
+            case States.corridor_0:     { corridor_0();     break; }
+            case States.stairs_0:       { stairs_0();       break; }
+            case States.floor:          { floor();          break; }
+            case States.guard_post_0:   { guard_post_0();   break; }
+            case States.corridor_1:     { corridor_1();     break; }
+            case States.stairs_1:       { stairs_1();       break; }
+            case States.guard_post_1:   { guard_post_1();   break; }
+            case States.corridor_2:     { corridor_2();     break; }
+            case States.stairs_2:       { stairs_2();       break; }
+            case States.corridor_3:     { corridor_3();     break; }
+            case States.corridor_4:     { corridor_4();     break; }
+            case States.launch_bay:     { launch_bay();     break; }
+        }
 	}
 	
+    // Story text for each state
 	#region State handler methods
 	void cell_0 () {
 		text.text = "Your eyes flicker open and you find yourself face down on the " +
@@ -265,5 +275,3 @@ public class TextController : MonoBehaviour {
 	}
 	#endregion
 }
-
-//https://gamebucket.io/game/6f00b1b9-e4ae-492e-9aef-768fc115ff02
